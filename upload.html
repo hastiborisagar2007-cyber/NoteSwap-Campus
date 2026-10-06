@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Notes | NoteSwap Campus</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            <span class="logo-icon">📚</span>
+            <span class="logo-main">NoteSwap</span>
+            <span class="logo-campus">Campus</span>
+        </div>
+
+        <nav class="navbar">
+
+            <a href="/dashboard">
+                Home
+            </a>
+
+            <a href="/notes">
+                Notes
+            </a>
+
+            <a href="#">
+                Favorites ⭐
+            </a>
+
+            <a href="#">
+                My Uploads
+            </a>
+
+            <a href="#">
+                Profile 👤
+            </a>
+
+        </nav>
+
+        <a href="/logout" class="login-button">
+            Logout
+        </a>
+
+    </header>
+
+
+    <main class="upload-page">
+
+        <div class="upload-container">
+
+            <div class="upload-heading">
+
+                <span class="section-label">
+                    SHARE KNOWLEDGE 📚
+                </span>
+
+                <h1>
+                    Upload Your Notes
+                </h1>
+
+                <p>
+                    Share useful study material with your classmates.
+                </p>
+
+            </div>
+
+
+            <form
+                action="/upload"
+                method="POST"
+                enctype="multipart/form-data"
+                class="upload-form"
+            >
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Note Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Example: DBMS Unit 1 Notes"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="subject">
+                        Subject
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        placeholder="Example: Database Management"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Tell students what these notes contain..."
+                        rows="5"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="file">
+                        Select PDF
+                    </label>
+
+                    <input
+                        type="file"
+                        id="file"
+                        name="file"
+                        accept=".pdf"
+                        required
+                    >
+
+                    <small>
+                        Only PDF files are allowed.
+                    </small>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                >
+                    📤 Upload Notes
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            📚 NoteSwap Campus
+        </div>
+
+        <p>
+            Share Notes. Learn Together.
+        </p>
+
+        <span>
+            © 2026 NoteSwap Campus
+        </span>
+
+    </footer>
+
+</body>
+
+</html>

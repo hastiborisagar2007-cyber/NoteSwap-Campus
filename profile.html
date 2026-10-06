@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Uploads | NoteSwap Campus</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+        📚
+        <span class="logo-main">NoteSwap</span>
+        <span class="logo-campus">Campus</span>
+    </div>
+
+
+    <nav class="navbar">
+
+        <a href="/dashboard">
+            Home
+        </a>
+
+        <a href="/notes">
+            Notes
+        </a>
+
+        <a href="/favorites">
+            Favorites ⭐
+        </a>
+
+        <a href="/my-uploads" class="active">
+            My Uploads
+        </a>
+
+        <a href="/profile">
+            Profile 👤
+        </a>
+
+    </nav>
+
+
+    <a href="/logout" class="login-button">
+        Logout
+    </a>
+
+</header>
+
+
+
+<main class="notes-page">
+
+
+<section class="notes-heading">
+
+    <div>
+
+        <span class="section-label">
+            YOUR CONTRIBUTIONS 📤
+        </span>
+
+        <h1>
+            My Uploads
+        </h1>
+
+        <p>
+            Manage the notes you have shared.
+        </p>
+
+    </div>
+
+
+    <a
+        href="/upload"
+        class="upload-note-button"
+    >
+        📤 Upload More
+    </a>
+
+</section>
+
+
+
+<section class="notes-grid">
+
+
+{% for note in notes %}
+
+
+<div class="note-card blue">
+
+
+    <div class="note-card-top">
+
+        <span class="big-note-icon">
+            📄
+        </span>
+
+    </div>
+
+
+    <span class="subject-tag">
+        {{ note["subject"] }}
+    </span>
+
+
+    <h3>
+        {{ note["title"] }}
+    </h3>
+
+
+    <p>
+        {{ note["description"] or "No description provided." }}
+    </p>
+
+
+    <div class="note-card-bottom">
+
+        <a
+            href="/uploads/{{ note['filename'] }}"
+            target="_blank"
+            class="view-note-button"
+        >
+            View PDF
+        </a>
+
+
+        <form
+            action="/delete-note/{{ note['id'] }}"
+            method="POST"
+            onsubmit="return confirm('Delete this note?');"
+        >
+
+            <button
+                type="submit"
+                class="delete-button"
+            >
+                🗑 Delete
+            </button>
+
+        </form>
+
+    </div>
+
+
+</div>
+
+
+{% else %}
+
+
+<div class="no-notes">
+
+    <div>
+        📤
+    </div>
+
+    <h2>
+        You haven't uploaded anything yet.
+    </h2>
+
+    <a
+        href="/upload"
+        class="upload-note-button"
+    >
+        Upload Your First Note
+    </a>
+
+</div>
+
+
+{% endfor %}
+
+
+</section>
+
+
+</main>
+
+
+</body>
+
+</html>

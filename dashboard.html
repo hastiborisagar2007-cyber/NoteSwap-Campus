@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | NoteSwap Campus</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+        📚
+        <span class="logo-main">NoteSwap</span>
+        <span class="logo-campus">Campus</span>
+    </div>
+
+
+    <nav class="navbar">
+
+        <a href="/dashboard" class="active">
+            Home
+        </a>
+
+        <a href="/notes">
+            Notes
+        </a>
+
+        <a href="/favorites">
+            Favorites ⭐
+        </a>
+
+        <a href="/my-uploads">
+            My Uploads
+        </a>
+
+        <a href="/profile">
+            Profile 👤
+        </a>
+
+    </nav>
+
+
+    <a
+        href="/logout"
+        class="login-button"
+    >
+        Logout
+    </a>
+
+</header>
+
+
+
+<main class="dashboard">
+
+
+<section class="dashboard-welcome">
+
+    <div>
+
+        <span class="section-label">
+            WELCOME BACK 👋
+        </span>
+
+
+        <h1>
+            Ready to study smarter,
+            {{ session["user_name"] }}?
+        </h1>
+
+
+        <p>
+            Find notes, share study material,
+            and prepare together with your campus.
+        </p>
+
+    </div>
+
+
+    <div class="welcome-icon">
+        📚
+    </div>
+
+</section>
+
+
+
+<section class="stats-grid">
+
+    <div class="stat-card purple">
+
+        <span>
+            📚
+        </span>
+
+        <strong>
+            {{ note_count }}
+        </strong>
+
+        <p>
+            Total Notes
+        </p>
+
+    </div>
+
+
+    <div class="stat-card pink">
+
+        <span>
+            ⭐
+        </span>
+
+        <strong>
+            {{ favorite_count }}
+        </strong>
+
+        <p>
+            Favorites
+        </p>
+
+    </div>
+
+
+    <div class="stat-card blue">
+
+        <span>
+            📤
+        </span>
+
+        <strong>
+            {{ upload_count }}
+        </strong>
+
+        <p>
+            My Uploads
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<section class="quick-section">
+
+    <span class="section-label">
+        QUICK ACTIONS
+    </span>
+
+    <h2>
+        What do you want to do?
+    </h2>
+
+
+    <div class="quick-grid">
+
+
+        <a
+            href="/notes"
+            class="quick-card purple"
+        >
+
+            <div class="quick-icon">
+                🔍
+            </div>
+
+            <h3>
+                Browse Notes
+            </h3>
+
+            <p>
+                Find useful notes for your subjects.
+            </p>
+
+            <span>
+                →
+            </span>
+
+        </a>
+
+
+
+        <a
+            href="/upload"
+            class="quick-card pink"
+        >
+
+            <div class="quick-icon">
+                📤
+            </div>
+
+            <h3>
+                Upload Notes
+            </h3>
+
+            <p>
+                Share your study material.
+            </p>
+
+            <span>
+                →
+            </span>
+
+        </a>
+
+
+
+        <a
+            href="/favorites"
+            class="quick-card blue"
+        >
+
+            <div class="quick-icon">
+                ⭐
+            </div>
+
+            <h3>
+                Favorites
+            </h3>
+
+            <p>
+                Open your saved notes.
+            </p>
+
+            <span>
+                →
+            </span>
+
+        </a>
+
+
+
+        <a
+            href="/my-uploads"
+            class="quick-card yellow"
+        >
+
+            <div class="quick-icon">
+                📁
+            </div>
+
+            <h3>
+                My Uploads
+            </h3>
+
+            <p>
+                Manage your uploaded notes.
+            </p>
+
+            <span>
+                →
+            </span>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+
+<section class="recent-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                STUDY SHELF
+            </span>
+
+            <h2>
+                Recent Notes 📚
+            </h2>
+
+        </div>
+
+
+        <a href="/notes">
+            View all →
+        </a>
+
+    </div>
+
+
+    <div class="recent-notes">
+
+        {% for note in recent_notes %}
+
+        <div class="recent-note lavender">
+
+            <div class="note-icon">
+                📄
+            </div>
+
+
+            <div class="note-info">
+
+                <h3>
+                    {{ note["title"] }}
+                </h3>
+
+                <p>
+                    {{ note["subject"] }}
+                </p>
+
+            </div>
+
+
+            <a
+                href="/uploads/{{ note['filename'] }}"
+                target="_blank"
+                class="view-note-button"
+            >
+                View
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div class="no-notes">
+
+            📚
+
+            <h3>
+                No notes uploaded yet!
+            </h3>
+
+            <p>
+                Be the first one to upload.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        📚 NoteSwap Campus
+    </div>
+
+    <p>
+        Share Notes. Learn Together.
+    </p>
+
+    <span>
+        © 2026 NoteSwap Campus
+    </span>
+
+</footer>
+
+
+</body>
+
+</html>

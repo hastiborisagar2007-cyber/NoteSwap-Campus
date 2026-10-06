@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Favorites | NoteSwap Campus</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+
+        <span class="logo-icon">📚</span>
+
+        <span class="logo-main">
+            NoteSwap
+        </span>
+
+        <span class="logo-campus">
+            Campus
+        </span>
+
+    </div>
+
+
+    <nav class="navbar">
+
+        <a href="/dashboard">
+            Home
+        </a>
+
+        <a href="/notes">
+            Notes
+        </a>
+
+        <a
+            href="/favorites"
+            class="active"
+        >
+            Favorites ⭐
+        </a>
+
+        <a href="/my-uploads">
+            My Uploads
+        </a>
+
+        <a href="/profile">
+            Profile 👤
+        </a>
+
+    </nav>
+
+
+    <a
+        href="/logout"
+        class="login-button"
+    >
+        Logout
+    </a>
+
+</header>
+
+
+
+<main class="notes-page">
+
+
+<section class="notes-heading">
+
+    <div>
+
+        <span class="section-label">
+            SAVED NOTES ⭐
+        </span>
+
+        <h1>
+            My Favorites
+        </h1>
+
+        <p>
+            Notes you saved for quick revision.
+        </p>
+
+    </div>
+
+
+    <a
+        href="/notes"
+        class="upload-note-button"
+    >
+        📚 Browse Notes
+    </a>
+
+</section>
+
+
+
+<section class="notes-grid">
+
+
+{% for note in notes %}
+
+
+<div class="note-card pink">
+
+
+    <div class="note-card-top">
+
+        <span class="big-note-icon">
+            📄
+        </span>
+
+
+        <form
+            action="{{ url_for(
+                'toggle_favorite',
+                note_id=note['id']
+            ) }}"
+            method="POST"
+        >
+
+            <button
+                type="submit"
+                class="favorite-button"
+            >
+                ⭐
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <span class="subject-tag">
+        {{ note["subject"] }}
+    </span>
+
+
+    <h3>
+        {{ note["title"] }}
+    </h3>
+
+
+    <p>
+        {{ note["description"] or "No description provided." }}
+    </p>
+
+
+    <p class="uploaded-by">
+        Uploaded by {{ note["name"] }}
+    </p>
+
+
+    <div class="note-card-bottom">
+
+        <span>
+            📄 PDF
+        </span>
+
+
+        <a
+            href="{{ url_for(
+                'uploaded_file',
+                filename=note['filename']
+            ) }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="view-note-button"
+        >
+            📄 View PDF →
+        </a>
+
+    </div>
+
+
+</div>
+
+
+{% else %}
+
+
+<div class="no-notes">
+
+    <div>
+        ⭐
+    </div>
+
+    <h2>
+        No favorites yet!
+    </h2>
+
+    <p>
+        Go to Notes and save your favorite study material.
+    </p>
+
+    <a
+        href="/notes"
+        class="upload-note-button"
+    >
+        Browse Notes
+    </a>
+
+</div>
+
+
+{% endfor %}
+
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+    <div class="footer-logo">
+        📚 NoteSwap Campus
+    </div>
+
+    <p>
+        Share Notes. Learn Together.
+    </p>
+
+    <span>
+        © 2026 NoteSwap Campus
+    </span>
+
+</footer>
+
+
+</body>
+
+</html>
